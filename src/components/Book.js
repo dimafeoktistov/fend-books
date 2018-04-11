@@ -21,7 +21,7 @@ function Book(props) {
           <div className="book-shelf-changer">
             <select
               value={shelf}
-              onChange={event => handleShelfChange(event.target.value)}
+              onChange={shelf => handleShelfChange(shelf.target.value)}
             >
               <option value="none" disabled>
                 Move to...
