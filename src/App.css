@@ -3,11 +3,9 @@ body,
 .root {
   height: 100%;
 }
-
 body {
   line-height: 1.5;
 }
-
 body,
 .app {
   background: white;
@@ -20,7 +18,6 @@ body,
   background: #2e7c31;
   text-align: center;
 }
-
 .list-books-title h1 {
   font-weight: 400;
   margin: 0;
@@ -45,7 +42,6 @@ body,
 .bookshelf-title {
   border-bottom: 1px solid #dedede;
 }
-
 .bookshelf-books {
   text-align: center;
 }
@@ -55,7 +51,6 @@ body,
   right: 25px;
   bottom: 25px;
 }
-
 .open-search a {
   display: block;
   width: 50px;
@@ -73,20 +68,13 @@ body,
 /* search page */
 
 .search-books-bar {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 5;
   display: flex;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
 }
-
 .search-books-input-wrapper {
   flex: 1;
   background: #e9e;
 }
-
 .search-books-bar input {
   width: 100%;
   padding: 15px 10px;
@@ -164,7 +152,6 @@ body,
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
-
 .book-shelf-changer select {
   width: 100%;
   height: 100%;
@@ -178,9 +165,13 @@ body,
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background: #eee;
 }
-
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;
   font-size: 0.8em;
+}
+
+h1 a {
+  text-decoration: none;
+  color: #fff;
 }
