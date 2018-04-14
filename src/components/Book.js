@@ -1,23 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Book(props) {
-  const { title, authors, shelf } = props.book;
+  const { title, authors, shelf, id } = props.book;
   const handleShelfChange = shelfChange => {
     props.onMoveBook(props.book, shelfChange);
   };
-
+  console.log('props', props.book);
   return (
     <li>
       <div className="book">
         <div className="book-top">
-          <div
-            className="book-cover"
-            style={{
-              width: 128,
-              height: 193,
-              backgroundImage: `url( ${props.book.imageLinks.smallThumbnail} )`
-            }}
-          />
+          <Link to={`/book/${id}`}>
+            <div
+              className="book-cover"
+              style={{
+                width: 128,
+                height: 193,
+                backgroundImage: `url( ${
+                  props.book.imageLinks.smallThumbnail
+                } )`
+              }}
+            />
+          </Link>
+
           <div className="book-shelf-changer">
             <select
               value={shelf}
