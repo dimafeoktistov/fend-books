@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 function Book(props) {
-  const { title, authors, shelf, id } = props.book;
+  const { title, authors, shelf } = props.book;
   const handleShelfChange = shelfChange => {
     props.onMoveBook(props.book, shelfChange);
   };
@@ -11,18 +10,14 @@ function Book(props) {
     <li>
       <div className="book">
         <div className="book-top">
-          <Link to={`/book/${id}`}>
-            <div
-              className="book-cover"
-              style={{
-                width: 128,
-                height: 193,
-                backgroundImage: `url( ${
-                  props.book.imageLinks.smallThumbnail
-                } )`
-              }}
-            />
-          </Link>
+          <div
+            className="book-cover"
+            style={{
+              width: 128,
+              height: 193,
+              backgroundImage: `url( ${props.book.imageLinks.smallThumbnail} )`
+            }}
+          />
 
           <div className="book-shelf-changer">
             <select
