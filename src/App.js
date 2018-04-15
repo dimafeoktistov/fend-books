@@ -1,21 +1,45 @@
 import React from 'react';
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './components/BooksAPI';
 import ShelfBox from './components/ShelfBox.js';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import SearchPage from './components/SearchPage.js';
+// import SearchPage from './components/SearchPage.js';
 import Header from './components/Header.js';
 import './App.css';
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false
+    books: [],
+    shelfes: [
+      {
+        flag: 'currentlyReading',
+        shelf: 'Currently Reading'
+      },
+      {
+        flag: 'wantToRead',
+        shelf: 'Want To Read'
+      },
+      {
+        flag: 'read',
+        shelf: 'Read'
+      }
+    ]
+  };
+
+  componentDidMount() {
+    BooksAPI.getAll().then(books => {
+      this.setState({ books });
+      console.log('books', this.state.books);
+    });
+  }
+
+  moveBook = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf;
+      this.setState(state => ({
+        books: state.books.filter(b => b.id !== book.id).concat([book])
+      }));
+    });
   };
 
   render() {
@@ -27,7 +51,11 @@ class BooksApp extends React.Component {
           render={() => (
             <div className="list-books">
               <Header />
-              <ShelfBox />
+              <ShelfBox
+                books={this.state.books}
+                shelfes={this.state.shelfes}
+                moveBook={this.moveBook}
+              />
 
               <div className="open-search">
                 <Link to="/search"> Add a book </Link>
@@ -35,18 +63,19 @@ class BooksApp extends React.Component {
             </div>
           )}
         />
-        <Route
-          path="/search"
-          render={({ history }) => (
-            <div>
-              <Header />
-              <SearchPage />
-            </div>
-          )}
-        />
       </div>
     );
   }
 }
+
+// <Route
+//   path="/search"
+//   render={({ history }) => (
+//     <div>
+//       <Header />
+//       <SearchPage />
+//     </div>
+//   )}
+// />
 
 export default BooksApp;
