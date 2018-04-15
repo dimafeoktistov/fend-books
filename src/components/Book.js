@@ -15,7 +15,10 @@ function Book(props) {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url( ${props.book.imageLinks.smallThumbnail} )`
+              backgroundImage:
+                typeof props.book.imageLinks !== 'undefined'
+                  ? 'url(' + props.book.imageLinks.smallThumbnail + ')'
+                  : ''
             }}
           />
 
@@ -38,7 +41,10 @@ function Book(props) {
           </div>
         </div>
         <div className="book-title"> {title} </div>
-        <div className="book-authors"> {authors} </div>
+        <div className="book-authors">
+          {' '}
+          {authors ? authors.join(', ') : ''}{' '}
+        </div>
       </div>
     </li>
   );

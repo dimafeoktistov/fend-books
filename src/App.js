@@ -3,7 +3,7 @@ import * as BooksAPI from './components/BooksAPI';
 import ShelfBox from './components/ShelfBox.js';
 import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-// import SearchPage from './components/SearchPage.js';
+import SearchPage from './components/SearchPage.js';
 import Header from './components/Header.js';
 import './App.css';
 
@@ -29,7 +29,7 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ books });
-      console.log('books', this.state.books);
+      console.log('books', books);
     });
   }
 
@@ -63,19 +63,22 @@ class BooksApp extends React.Component {
             </div>
           )}
         />
+        <Route
+          path="/search"
+          render={({ history }) => (
+            <div>
+              <Header />
+              <SearchPage
+                books={this.state.books}
+                shelfes={this.state.shelfes}
+                moveBook={this.moveBook}
+              />
+            </div>
+          )}
+        />
       </div>
     );
   }
 }
-
-// <Route
-//   path="/search"
-//   render={({ history }) => (
-//     <div>
-//       <Header />
-//       <SearchPage />
-//     </div>
-//   )}
-// />
 
 export default BooksApp;

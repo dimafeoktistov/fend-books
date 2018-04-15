@@ -10,10 +10,18 @@ class SearchPage extends Component {
   };
 
   handleChange = event => {
-    this.setState({
-      value: event.target.value
-    });
-    this.searchBook(event.target.value);
+    let searchTerm = event.target.value;
+    if (searchTerm === '') {
+      this.setState({
+        value: '',
+        searchBooks: []
+      });
+    } else {
+      this.setState({
+        value: searchTerm
+      });
+      this.searchBook(searchTerm);
+    }
   };
 
   searchBook = value => {
@@ -23,18 +31,21 @@ class SearchPage extends Component {
           this.setState({ searchBooks: allBooks });
         } else if (value === '') {
           this.setState({ searchBooks: [] });
+        } else if ({ searchBooks: [] }) {
+          this.setState({ searchBooks: [] });
         }
       });
     }
   };
 
   render() {
-    let BooksList = [];
+    const { value, searchBooks } = this.state;
+    let booksList = [];
 
     if (searchBooks.length > 0) {
-      BooksList = searchBooks.map(book => {
+      booksList = searchBooks.map(book => {
         let nbook;
-        shelfBooks.forEach(shelfBook => {
+        this.props.books.forEach(shelfBook => {
           if (book.id === shelfBook.id) {
             nbook = shelfBook;
           }
@@ -66,9 +77,9 @@ class SearchPage extends Component {
         <div className="search-books-results">
           <ol className="books-grid">
             <SearchResults
-              books={BooksList}
-              shelfes={shelfes}
-              onUpdateBook={this.updateBook}
+              books={booksList}
+              shelfes={this.props.shelfes}
+              onMoveBook={this.props.moveBook}
             />
           </ol>
         </div>

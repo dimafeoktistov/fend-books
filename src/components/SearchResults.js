@@ -11,7 +11,7 @@ function SearchResults(props) {
             <Book
               key={book.id}
               book={book}
-              onMoveBook={props.onUpdateBook}
+              onMoveBook={props.onMoveBook}
               shelf={props.shelfes}
             />
           ))}
